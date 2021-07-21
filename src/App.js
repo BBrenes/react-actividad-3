@@ -1,11 +1,13 @@
 import './App.css';
 import { ThemeContext, theme } from './components/ThemeContext';
-import Header from './components/Header';
+import 'fontsource-roboto';
+import Home from './components/Home';
 
 function App() {
+  
   return (
     <ThemeContext.Provider value= { theme }> 
-      <Header />
+      <Home />
     </ThemeContext.Provider>
     
   );
