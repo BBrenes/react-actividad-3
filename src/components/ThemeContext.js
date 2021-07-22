@@ -1,6 +1,6 @@
 import React from 'react'
 
-const theme = {
+export const theme = {
     containerFirstTitle: {
         marginTop: '40px',
         marginBottom: '15px'
@@ -66,9 +66,40 @@ const theme = {
         boxShadow: 'none',
         backgroundColor: 'white'
     },
-
+    postTitle: {
+        color: 'white',
+        fontWeight: 'bold',
+        marginBottom: '18px',
+    },
+    postComments: {
+        color: 'white',
+        fontSize: '15px',
+        fontStyle: 'italic',
+        marginBottom: '4px',
+    },
+    postIconComments: {
+        color: 'white',
+        fontSize: '15px',
+        marginLeft: '4px',
+    },
+    postDescription: {
+        height: '50px',
+        color: 'white',
+        fontSize: '15px',
+        overflow: 'hidden',
+        paddingRight: '10vw',
+        marginBottom: '10px'
+    },
+    postCategory: {
+        color: 'white',
+        fontSize: '13px',
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        letterSpacing: '2px',
+        marginBottom: '22px'
+    },
 }
 
-const ThemeContext = React.createContext()
+const ThemeContext = React.createContext(theme)
 
-export { ThemeContext, theme }
+export default ThemeContext

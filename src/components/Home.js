@@ -4,8 +4,8 @@ import PostModal from './PostModal';
 import FilterTabs from './FilterTabs';
 import PostList from './PostList';
 
-function Home() {
-
+function Home({ theme }) {
+  
     const [filter, setFilter] = useState('All')
 
     const handleChangeFilter = (category) => {
@@ -14,11 +14,11 @@ function Home() {
 
   return (
     <>
-      <Header />
-      <PostModal />
-      <FilterTabs changeFilter={handleChangeFilter}/>
+      <Header theme={theme} />
+      <PostModal theme={theme} />
+      <FilterTabs theme={theme} changeFilter={handleChangeFilter}/>
       {filter}
-      <PostList />
+      <PostList theme={theme} />
     </>
   );
 }

@@ -1,5 +1,4 @@
-import React, {useState, useContext} from 'react';
-import { ThemeContext } from './ThemeContext'
+import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -15,9 +14,12 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import { IconButton } from '@material-ui/core';
 import InsertLinkIcon from '@material-ui/icons/InsertLink';
+import { useDispatch } from 'react-redux';
+import { addPost } from '../redux/post/postActions';
 
-export default function PostModal() {
-    const theme = useContext(ThemeContext)
+export default function PostModal({ theme }) {
+
+    const dispatch = useDispatch()
     const [open, setOpen] = React.useState(false);
     const [post, setPost]= useState({
       id: '',
@@ -67,6 +69,7 @@ export default function PostModal() {
         setFormOk(false)
       }else{
         console.log(post)
+        dispatch(addPost(post))
         setOpen(false)
       }
     }

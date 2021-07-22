@@ -1,11 +1,9 @@
-import React, { useContext } from 'react'
-import { ThemeContext } from './ThemeContext'
+import React from 'react'
 import Button from '@material-ui/core/Button'
+import clsx from 'clsx'
 
 
-export default function FilterTab({category, action, ...other}) {
-
-    const theme = useContext(ThemeContext)
+export default function FilterTab({theme, category, action, ...other}) {
 
     return (
         <Button 

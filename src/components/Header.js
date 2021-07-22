@@ -1,12 +1,10 @@
-import React, { useContext } from 'react'
-import { ThemeContext } from './ThemeContext'
+import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import { Typography } from '@material-ui/core'
 
 
-export default function Header() {
+export default function Header({ theme }) {
 
-    const theme = useContext(ThemeContext)
 
     return (
         <>

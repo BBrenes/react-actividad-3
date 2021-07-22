@@ -1,12 +1,10 @@
-import React, { useContext, useState } from 'react'
-import { ThemeContext } from './ThemeContext'
+import React, { useState } from 'react'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import FilterTab from './FilterTab'
 import Grid from '@material-ui/core/Grid'
 
-export default function FilterTabs({changeFilter}) {
+export default function FilterTabs({theme, changeFilter}) {
 
-    const theme = useContext(ThemeContext)
     const [categories, setCategories] = useState([
         {name: 'All', selected: true, id: 0},
         {name: 'Travel', selected: false, id: 1},
@@ -37,7 +35,7 @@ export default function FilterTabs({changeFilter}) {
         <Grid container justifyContent="center" alignItems="center" >
             <ButtonGroup style={theme.FilterTabs}>
                 {categories.map(category => (
-                    <FilterTab category={category} key={category.id} action={selectTab}  />
+                    <FilterTab theme={theme} category={category} key={category.id} action={selectTab}  />
                 ))}
             </ButtonGroup>
         </Grid>
