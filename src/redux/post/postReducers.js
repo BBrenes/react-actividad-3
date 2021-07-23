@@ -6,9 +6,17 @@ const reducer = (state = INITIAL_STATE, action) => {
     switch(action.type){
         case ADD_POST:
             return [...state, action.payload]
+        case EDIT_POST:
+            const newStateEdited = state.map(post => {
+                if(post.id === action.payload.id){
+                    return action.payload
+                }
+                return post
+            })
+            return newStateEdited
         case DELETE_POST:
-            const newState = state.filter(post => post.id !== action.payload)
-            return newState
+            const newStateDeleted = state.filter(post => post.id !== action.payload)
+            return newStateDeleted
         default:
             return state
     }

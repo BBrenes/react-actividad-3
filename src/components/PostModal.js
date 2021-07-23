@@ -15,24 +15,27 @@ import Select from '@material-ui/core/Select';
 import { IconButton } from '@material-ui/core';
 import InsertLinkIcon from '@material-ui/icons/InsertLink';
 import { useDispatch } from 'react-redux';
-import { addPost } from '../redux/post/postActions';
+import { addPost, editPost } from '../redux/post/postActions';
 
-export default function PostModal({ theme }) {
+export default function PostModal({ theme, postInfo, modalMode }) {
 
     const dispatch = useDispatch()
     const [open, setOpen] = React.useState(false);
-    const [post, setPost]= useState({
-      id: '',
-      title: '',
-      description:'',
-      category: '',
-      imageURL: ''
-    })
+    const [post, setPost]= useState(
+      {
+        id: '',
+        title: '',
+        description:'',
+        category: '',
+        imageURL: '',
+        comments: []
+      } 
+    )
     const [formOk, setFormOk] = useState(null);
   
     const handleClickOpen = () => {
-      setOpen(true);
       setId();
+      setOpen(true);
     };
   
     const handleClose = () => {
@@ -49,17 +52,29 @@ export default function PostModal({ theme }) {
     
     const setId = () => {
       const newId = new Date().getTime().toString()
-      setPost({
-        id: newId,
-        title: '',
-        description:'',
-        category: '',
-        imageURL: 'https://source.unsplash.com/random'
-      })
+      if(modalMode === 'create'){
+        setPost({
+          id: newId,
+          title: '',
+          description:'',
+          category: '',
+          imageURL: 'https://source.unsplash.com/random',
+          comments: []
+        }) 
+      } else{
+        setPost({
+          id: postInfo.id,
+          title: postInfo.title,
+          description: postInfo.description,
+          category: postInfo.category,
+          imageURL: 'https://source.unsplash.com/random',
+          comments: postInfo.comments
+        })
+      }
       setFormOk(null)
     }
   
-    const createPost = () => {
+    const savePost = () => {
       if(
         post.title === "" ||
         post.description === "" ||
@@ -68,23 +83,32 @@ export default function PostModal({ theme }) {
       ){
         setFormOk(false)
       }else{
-        console.log(post)
-        dispatch(addPost(post))
+        if(modalMode === 'create'){
+          dispatch(addPost(post))
+        } else{
+          dispatch(editPost(post))
+        }
         setOpen(false)
       }
     }
   
     return (
       <div>
+        {modalMode === 'create' ?
         <Grid container justifyContent="flex-end" alignItems="center" >
             <Grid item>
                 <IconButton style={theme.createButton} onClick={handleClickOpen} >
                     <CreateIcon />
                 </IconButton>
             </Grid>
-        </Grid> 
+        </Grid> :
+        <CreateIcon style={{color: 'white'}} onClick={handleClickOpen}/>
+        }
+        
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title" style={{textAlign: "center"}}>Create Post</DialogTitle>
+          <DialogTitle id="form-dialog-title" style={{textAlign: "center"}}>
+            {modalMode === 'create' ? 'Create Post' : "Edit Post" }
+          </DialogTitle>
           <DialogContent>
             <TextField
               autoFocus
@@ -95,6 +119,7 @@ export default function PostModal({ theme }) {
               type="text"
               fullWidth
               onChange={handleChange}
+              value={post.title}
             />
             <TextField
               autoFocus
@@ -105,6 +130,7 @@ export default function PostModal({ theme }) {
               type="text"
               fullWidth
               onChange={handleChange}
+              value={post.description}
             />
             <FormControl fullWidth>
                 <InputLabel id="demo-simple-select-label">Category</InputLabel>
@@ -147,7 +173,7 @@ export default function PostModal({ theme }) {
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
-            <Button variant="contained" onClick={createPost} color="primary">
+            <Button variant="contained" onClick={savePost} color="primary">
               Save
             </Button>
           </DialogActions>

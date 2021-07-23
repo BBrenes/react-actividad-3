@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import Grid from '@material-ui/core/Grid'
 import { Typography } from '@material-ui/core'
 import QuestionAnswerOutlinedIcon from '@material-ui/icons/QuestionAnswerOutlined';
-import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { makeStyles } from "@material-ui/core/styles";
 import { deletePost } from '../redux/post/postActions';
@@ -32,12 +31,24 @@ export default function Post({theme, post, ...other}) {
             '&:hover $bar': {
                 width: '90px',
             }
+            ,
+            '&:hover $icons': {
+                visibility: 'visible',
+            }
         },
         postIcon: {
             marginLeft: '10px',
             color: 'transparent',
             fontSize: '20px',
             transition: 'color 1s',
+        },
+        icons: {
+            marginLeft: '10px',
+            visibility: 'hidden',
+            fontSize: '20px',
+        },
+        icon: {
+            color: 'white',
         },
         bar: {
             marginBottom: '10px',
@@ -62,18 +73,18 @@ export default function Post({theme, post, ...other}) {
             </Grid>
             <Grid item >
                 <Typography variant="h6" style={theme.postComments} >
-                3 Comments <QuestionAnswerOutlinedIcon style={theme.postIconComments}/>
+                {post.comments.length} Comments <QuestionAnswerOutlinedIcon style={theme.postIconComments}/>
                 </Typography>
             </Grid>
             <Grid item >
                 <Typography variant="h6" style={theme.postDescription} >{post.description}</Typography>
             </Grid>
             <Grid container item direction="row" justifyContent="flex-end" alignItems="center">
-                <Grid item >
-                    <CreateIcon className={classes.postIcon} />
+                <Grid item className={classes.icons} >
+                    <PostModal postInfo={post} theme={theme} modalMode="edit"/>
                 </Grid>
-                <Grid item >
-                    <DeleteIcon className={classes.postIcon} onClick={() => dispatch(deletePost(post.id))}/>
+                <Grid item className={classes.icons}>
+                    <DeleteIcon className={classes.icon} onClick={() => dispatch(deletePost(post.id))}/>
                 </Grid>
             </Grid>
             <Grid item >
