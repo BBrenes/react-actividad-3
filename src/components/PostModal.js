@@ -82,7 +82,7 @@ export default function PostModal({ theme }) {
                     <CreateIcon />
                 </IconButton>
             </Grid>
-        </Grid>
+        </Grid> 
         <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title" style={{textAlign: "center"}}>Create Post</DialogTitle>
           <DialogContent>
@@ -115,11 +115,11 @@ export default function PostModal({ theme }) {
                     value={post.category}
                     onChange={handleChange}
                 >
-                    <MenuItem value={'travel'}>Travel</MenuItem>
-                    <MenuItem value={'lifestyle'}>Lifestyle</MenuItem>
-                    <MenuItem value={'business'}>Business</MenuItem>
-                    <MenuItem value={'food'}>Food</MenuItem>
-                    <MenuItem value={'work'}>Work</MenuItem>
+                    <MenuItem value={'Travel'}>Travel</MenuItem>
+                    <MenuItem value={'Lifestyle'}>Lifestyle</MenuItem>
+                    <MenuItem value={'Business'}>Business</MenuItem>
+                    <MenuItem value={'Food'}>Food</MenuItem>
+                    <MenuItem value={'Work'}>Work</MenuItem>
                 </Select>
             </FormControl>
             <TextField

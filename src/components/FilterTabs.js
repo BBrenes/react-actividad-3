@@ -32,7 +32,7 @@ export default function FilterTabs({theme, changeFilter}) {
     }
 
     return (
-        <Grid container justifyContent="center" alignItems="center" >
+        <Grid container justifyContent="center" alignItems="center" style={{marginBottom: '20px'}}>
             <ButtonGroup style={theme.FilterTabs}>
                 {categories.map(category => (
                     <FilterTab theme={theme} category={category} key={category.id} action={selectTab}  />

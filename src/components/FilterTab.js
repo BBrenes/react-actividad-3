@@ -9,7 +9,7 @@ export default function FilterTab({theme, category, action, ...other}) {
         <Button 
             {...other}
             onClick={() => action(category.id)}
-            style={category.selected ? theme.filterTabSelected : theme.filterTabNoSelected}
+            style={Object.assign({}, theme.filterTab, category.selected ? theme.filterTab.selected : theme.filterTab.noSelected)}
         >{category.name}
         </Button>
     )

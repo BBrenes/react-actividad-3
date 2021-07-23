@@ -46,30 +46,28 @@ export const theme = {
         marginTop: '15px'
     },
     filterTabs: {
-        boxShadow: 'none'
+        boxShadow: 'none',
+        marginBottom: '20px'
     },
-    filterTabSelected: {
+    filterTab: {
         textTransform: 'none',
         width: '80px',
         color: '#2e2e2d', 
         borderColor: '#a8a8a8', 
         border: '1px solid #e6e6e6',
         boxShadow: 'none',
-        backgroundColor: '#c9c9c9'
-    },
-    filterTabNoSelected: {
-        textTransform: 'none',
-        width: '80px',
-        color: '#2e2e2d', 
-        borderColor: '#a8a8a8', 
-        border: '1px solid #e6e6e6',
-        boxShadow: 'none',
-        backgroundColor: 'white'
+        selected: {
+            backgroundColor: '#c9c9c9'
+        },
+        noSelected: {
+            backgroundColor: 'white'
+        }
+        
     },
     postTitle: {
         color: 'white',
         fontWeight: 'bold',
-        marginBottom: '18px',
+        marginBottom: '1px',
     },
     postComments: {
         color: 'white',
@@ -88,7 +86,7 @@ export const theme = {
         fontSize: '15px',
         overflow: 'hidden',
         paddingRight: '10vw',
-        marginBottom: '10px'
+        marginBottom: '0'
     },
     postCategory: {
         color: 'white',
