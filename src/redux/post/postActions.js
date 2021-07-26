@@ -21,9 +21,9 @@ export const deletePost = (postId) => {
     }
 }
 
-export const addComment = (comment) => {
+export const addComment = (commentInfo) => {
     return {
         type: ADD_COMMENT,
-        payload: comment
+        payload: commentInfo
     }
 }

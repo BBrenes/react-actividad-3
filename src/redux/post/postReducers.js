@@ -18,7 +18,13 @@ const reducer = (state = INITIAL_STATE, action) => {
             const newStateDeleted = state.filter(post => post.id !== action.payload)
             return newStateDeleted
         case ADD_COMMENT:
-            return [...state, action.payload]
+            const newStateComment = state.map(post => {
+                if(post.id === action.payload.id){
+                    return {...post, comments: [...post.comments, action.payload.comment]}
+                }
+                return post
+            })
+            return newStateComment
         default:
             return state
     }

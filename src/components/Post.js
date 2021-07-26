@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import Grid from '@material-ui/core/Grid'
 import { Typography } from '@material-ui/core'
@@ -23,7 +24,6 @@ export default function Post({theme, post, ...other}) {
             paddingRight: '2vw',
             '&:hover': {
                 opacity: '0.8',
-                cursor: 'pointer',
             },
             '&:hover $postIcon': {
                 color: 'white',
@@ -46,6 +46,10 @@ export default function Post({theme, post, ...other}) {
             marginLeft: '10px',
             visibility: 'hidden',
             fontSize: '20px',
+            '&:hover': {
+                opacity: '0.8',
+                cursor: 'pointer'
+            },
         },
         icon: {
             color: 'white',
@@ -65,20 +69,23 @@ export default function Post({theme, post, ...other}) {
         <Grid container item xs={12} md={6} direction="column" justifyContent="flex-end" alignItems="flex-start"
             className={classes.postContainer}
         >
-            <Grid item >
-                <Typography variant="h4" style={theme.postTitle} >{post.title}</Typography>
-            </Grid>
-            <Grid item >
-                <div className={classes.bar}></div>
-            </Grid>
-            <Grid item >
-                <Typography variant="h6" style={theme.postComments} >
-                {post.comments.length} Comments <QuestionAnswerOutlinedIcon style={theme.postIconComments}/>
-                </Typography>
-            </Grid>
-            <Grid item >
-                <Typography variant="h6" style={theme.postDescription} >{post.description}</Typography>
-            </Grid>
+            <Link to={`/post/${post.id}`} style={{ textDecoration: 'none' }}>
+                <Grid item >
+                    <Typography variant="h4" style={theme.postTitle} >{post.title}</Typography>
+                </Grid>
+                <Grid item >
+                    <div className={classes.bar}></div>
+                </Grid>
+                <Grid item >
+                    <Typography variant="h6" style={theme.postComments} >
+                    {post.comments.length} Comments <QuestionAnswerOutlinedIcon style={theme.postIconComments}/>
+                    </Typography>
+                </Grid>
+                <Grid item >
+                    <Typography variant="h6" style={theme.postDescription} >{post.description}</Typography>
+                </Grid>
+            </Link>
+            
             <Grid container item direction="row" justifyContent="flex-end" alignItems="center">
                 <Grid item className={classes.icons} >
                     <PostModal postInfo={post} theme={theme} modalMode="edit"/>

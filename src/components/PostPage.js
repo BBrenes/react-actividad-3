@@ -1,8 +1,18 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import { useParams } from "react-router";
 import Header from './Header';
 import PostInformation from './PostInformation';
 
 function PostPage({ theme, postList }) {
+
+    const { postId } = useParams();
+    const postFound = postList.find(post => post.id === postId);
+    const [postPage, setPostPage] = useState(postFound)
+
+    useEffect(() => {
+        const postFound = postList.find(post => post.id === postId);
+        setPostPage(postFound)
+    }, [postList, postId])
 
     const [postExample, setPostExample] = useState(
       {
@@ -21,7 +31,7 @@ function PostPage({ theme, postList }) {
   return (
     <>
         <Header theme={theme} />
-        <PostInformation post={postExample} />
+        <PostInformation post={postPage} />
     </>
   );
 }

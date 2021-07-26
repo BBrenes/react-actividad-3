@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
 import { addComment } from '../redux/post/postActions';
 
-export default function WriteComment() {
+export default function WriteComment({id}) {
 
     const dispatch = useDispatch()
     const [comment, setComment]= useState('')
@@ -32,7 +32,7 @@ export default function WriteComment() {
         if(
           comment !== ""    
         ){
-            dispatch(addComment(comment))
+            dispatch(addComment({comment:comment, id:id}))
         }
       }
 

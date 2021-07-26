@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 import Grid from '@material-ui/core/Grid'
 import Comment from './Comment'
 import WriteComment from './WriteComment'
@@ -17,16 +18,6 @@ export default function PostInformation({post}) {
             backgroundPosition: '50% 50%',
             paddingLeft: '2vw',
             paddingRight: '2vw',
-            '&:hover $postIcon': {
-                color: 'white',
-            },
-            '&:hover $bar': {
-                width: '90px',
-            }
-            ,
-            '&:hover $icons': {
-                visibility: 'visible',
-            }
         },
         postInfoTitleContainer: {
             height:'250px',
@@ -77,9 +68,11 @@ export default function PostInformation({post}) {
             <Grid container item direction="row" justifyContent="flex-start" alignItems="center"
                 className={classes.viewPostsContainer}
             >
+                <Link to={'/'} style={{ textDecoration: 'none' }}>
                 <Grid item >
                     <Typography variant="h6" className={classes.viewPosts} >&#60; View Posts</Typography>
                 </Grid>
+                </Link>
             </Grid>
             <Grid container item direction="row" justifyContent="center" alignItems="center"
                 className={classes.postInfoTitleContainer}
@@ -105,7 +98,7 @@ export default function PostInformation({post}) {
                         <Comment key={i} comment={comment} />
                     ))
                 }
-                <WriteComment />
+                <WriteComment id={post.id}/>
             </Grid>
         </Grid>
         </>
