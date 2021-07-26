@@ -122,7 +122,6 @@ export default function PostModal({ theme, postInfo, modalMode }) {
               value={post.title}
             />
             <TextField
-              autoFocus
               margin="dense"
               name="description"
               id="description"
@@ -149,7 +148,6 @@ export default function PostModal({ theme, postInfo, modalMode }) {
                 </Select>
             </FormControl>
             <TextField
-              autoFocus
               margin="dense"
               name="imageURL"
               id="imageURL"

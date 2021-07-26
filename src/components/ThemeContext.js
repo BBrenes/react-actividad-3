@@ -47,7 +47,6 @@ export const theme = {
     },
     filterTabs: {
         boxShadow: 'none',
-        marginBottom: '20px'
     },
     filterTab: {
         textTransform: 'none',

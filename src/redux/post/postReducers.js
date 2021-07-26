@@ -17,6 +17,8 @@ const reducer = (state = INITIAL_STATE, action) => {
         case DELETE_POST:
             const newStateDeleted = state.filter(post => post.id !== action.payload)
             return newStateDeleted
+        case ADD_COMMENT:
+            return [...state, action.payload]
         default:
             return state
     }
