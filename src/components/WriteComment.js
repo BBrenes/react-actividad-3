@@ -33,6 +33,7 @@ export default function WriteComment({id}) {
           comment !== ""    
         ){
             dispatch(addComment({comment:comment, id:id}))
+            setComment('')
         }
       }
 
