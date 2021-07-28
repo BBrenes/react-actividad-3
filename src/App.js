@@ -23,10 +23,10 @@ function App({postData}) {
         <Router>
           <Switch>
             <Route path="/" exact>
-              <Home theme={theme} postList={postData}/>
+              <Home postList={postData}/>
             </Route>
             <Route path="/post/:postId">
-              <PostPage theme={theme} postList={postData}/>
+              <PostPage postList={postData}/>
             </Route>
           </Switch>
         </Router> 
