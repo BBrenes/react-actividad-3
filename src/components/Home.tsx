@@ -1,27 +1,24 @@
-import React, {useContext, useState} from 'react';
+import React, { useState} from 'react';
 import Header from './Header';
 import PostModal from './PostModal';
 import FilterTabs from './FilterTabs';
 import PostList from './PostList';
-import ThemeContext from './ThemeContext';
 import { State } from '../models/Post'
 
 const Home: React.FC<{postList: State}> = ({ postList }) => {
-
-    const theme = useContext(ThemeContext)
   
-    const [filter, setFilter] = useState('All')
+    const [filter, setFilter] = useState<string>('All')
 
-    const handleChangeFilter = (category: string) => {
+    const handleChangeFilter = (category: string):void => {
         setFilter(category)
     }
 
   return (
     <>
-      <Header theme={theme} />
-      <PostModal theme={theme} modalMode='create'/>
-      <FilterTabs theme={theme} changeFilter={handleChangeFilter}/>
-      <PostList theme={theme} postList={postList} filter={filter}/>
+      <Header />
+      <PostModal modalMode='create'/>
+      <FilterTabs changeFilter={handleChangeFilter}/>
+      <PostList postList={postList} filter={filter}/>
     </>
   );
 }

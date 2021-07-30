@@ -5,7 +5,11 @@ import { Typography } from '@material-ui/core'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { makeStyles } from "@material-ui/core/styles";
 
-export default function Comment({comment}) {
+interface Props {
+    comment: string;
+}
+
+const Comment: React.FC<Props> = ({ comment }) => {
 
     const useInfoStyles = makeStyles({
         commentContainer: {
@@ -42,7 +46,7 @@ export default function Comment({comment}) {
         <Grid container item direction="column" justifyContent="flex-start" alignItems="flex-start" className={classes.commentContainer}>
             <Paper className={classes.paper}>
                 <Grid container item direction="row" justifyContent="flex-start" alignItems="center">
-                    <AccountCircleIcon variant="h6" className={classes.userIcon} />
+                    <AccountCircleIcon className={classes.userIcon} />
                     <Typography variant="h6" className={classes.username} >Jon Doe</Typography>
                 </Grid>
                 <Grid container item direction="row" justifyContent="flex-start" alignItems="center">
@@ -52,3 +56,5 @@ export default function Comment({comment}) {
         </Grid>
     )
 }
+
+export default Comment;

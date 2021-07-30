@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Grid from '@material-ui/core/Grid'
 import { Typography } from '@material-ui/core'
+import ThemeContext from './ThemeContext';
 
+const Header: React.FC = () => {
 
-export default function Header({ theme }) {
-
+    const theme = useContext(ThemeContext)
 
     return (
         <>
@@ -20,8 +21,10 @@ export default function Header({ theme }) {
             </Grid>
         </Grid>
         <Grid container justifyContent="center" alignItems="flex-end" style={theme.containerSecondTitle}>
-            <Typography variant="h3" style={theme.secondTitle} >Discovering the World</Typography>
+            <Typography variant="h3" style={theme.secondTitle as Object} >Discovering the World</Typography>
         </Grid>
         </>
     )
 }
+
+export default Header;

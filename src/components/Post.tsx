@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import Grid from '@material-ui/core/Grid'
@@ -8,9 +8,16 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { makeStyles } from "@material-ui/core/styles";
 import { deletePost } from '../redux/post/postActions';
 import PostModal from './PostModal';
+import { PostI } from '../models/Post'
+import ThemeContext from './ThemeContext';
 
-export default function Post({theme, post, ...other}) {
+interface Props {
+    post: PostI;
+  }
 
+const Post:React.FC<Props> = ({ post, ...other}) => {
+
+    const theme = useContext(ThemeContext)
     const dispatch = useDispatch()
 
     const useIconStyles = makeStyles({
@@ -71,7 +78,7 @@ export default function Post({theme, post, ...other}) {
         >
             <Link to={`/post/${post.id}`} style={{ textDecoration: 'none' }}>
                 <Grid item >
-                    <Typography variant="h4" style={theme.postTitle} >{post.title}</Typography>
+                    <Typography variant="h4" style={theme.postTitle as Object} >{post.title}</Typography>
                 </Grid>
                 <Grid item >
                     <div className={classes.bar}></div>
@@ -88,16 +95,18 @@ export default function Post({theme, post, ...other}) {
             
             <Grid container item direction="row" justifyContent="flex-end" alignItems="center">
                 <Grid item className={classes.icons} >
-                    <PostModal postInfo={post} theme={theme} modalMode="edit"/>
+                    <PostModal postInfo={post} modalMode="edit"/>
                 </Grid>
                 <Grid item className={classes.icons}>
                     <DeleteIcon className={classes.icon} onClick={() => dispatch(deletePost(post.id))}/>
                 </Grid>
             </Grid>
             <Grid item >
-                <Typography variant="h6" style={theme.postCategory} >{post.category}</Typography>
+                <Typography variant="h6" style={theme.postCategory as Object} >{post.category}</Typography>
             </Grid>
             
         </Grid>
     )
 }
+
+export default Post;

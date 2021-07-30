@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -16,23 +16,20 @@ import { IconButton } from '@material-ui/core';
 import InsertLinkIcon from '@material-ui/icons/InsertLink';
 import { useDispatch } from 'react-redux';
 import { addPost, editPost } from '../redux/post/postActions';
-import { Post } from '../models/Post'
+import { PostI } from '../models/Post'
+import ThemeContext from './ThemeContext';
 
 interface Props {
-  theme: {
-    createButton: object;
-    linkIcon: object;
-    modalErrorMessage: object;
-  };
-  postInfo?: Post;
+  postInfo?: PostI;
   modalMode: string;
 }
 
-const PostModal: React.FC<Props> = ({ theme, postInfo, modalMode }) => {
+const PostModal: React.FC<Props> = ({ postInfo, modalMode }) => {
 
+    const theme = useContext(ThemeContext)
     const dispatch = useDispatch()
-    const [open, setOpen] = useState(false);
-    const [post, setPost]= useState<Post>(
+    const [open, setOpen] = useState<boolean>(false);
+    const [post, setPost]= useState<PostI>(
       {
         id: '',
         title: '',
@@ -44,16 +41,17 @@ const PostModal: React.FC<Props> = ({ theme, postInfo, modalMode }) => {
     )
     const [formOk, setFormOk] = useState<boolean | null>(null);
   
-    const handleClickOpen = () => {
+    const handleClickOpen = ():void => {
       setId();
       setOpen(true);
     };
   
-    const handleClose = () => {
+    const handleClose = ():void => {
       setOpen(false);
     };
   
     const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<{ name?: unknown; value: unknown; }>): void => {
+      e.preventDefault();
       const {name, value} = e.target;
       setPost(prevState=>({
         ...prevState,
@@ -61,7 +59,7 @@ const PostModal: React.FC<Props> = ({ theme, postInfo, modalMode }) => {
       }))
     }
     
-    const setId = () => {
+    const setId = ():void => {
       const newId = new Date().getTime().toString()
       if(modalMode === 'create'){
         setPost({
@@ -85,7 +83,7 @@ const PostModal: React.FC<Props> = ({ theme, postInfo, modalMode }) => {
       setFormOk(null)
     }
   
-    const savePost = () => {
+    const savePost = ():void => {
       if(
         post.title === "" ||
         post.description === "" ||
@@ -146,7 +144,7 @@ const PostModal: React.FC<Props> = ({ theme, postInfo, modalMode }) => {
                 <InputLabel id="demo-simple-select-label">Category</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                    id="category"
                     name="category"
                     value={post.category}
                     onChange={handleChange}
@@ -169,7 +167,7 @@ const PostModal: React.FC<Props> = ({ theme, postInfo, modalMode }) => {
               value={post.imageURL}
             >
             </TextField>
-            <InsertLinkIcon style={theme.linkIcon}/>
+            <InsertLinkIcon style={theme.linkIcon as object}/>
             {
                 formOk === false ? 
                 <DialogContentText style={theme.modalErrorMessage}>

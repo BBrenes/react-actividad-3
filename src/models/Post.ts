@@ -1,6 +1,6 @@
-export type State = Post[];
+export type State = PostI[];
 
-export interface Post {
+export interface PostI {
     id: string;
     title: string;
     description: string;

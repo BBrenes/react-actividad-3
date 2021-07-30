@@ -5,8 +5,13 @@ import Comment from './Comment'
 import WriteComment from './WriteComment'
 import { Typography } from '@material-ui/core'
 import { makeStyles } from "@material-ui/core/styles";
+import { PostI } from '../models/Post'
 
-export default function PostInformation({post}) {
+interface Props {
+    post: PostI;
+}
+
+const PostInformation:React.FC<Props> = ({ post }) => {
 
     const useInfoStyles = makeStyles({
         infoTitleContainer: {
@@ -94,7 +99,7 @@ export default function PostInformation({post}) {
                     <Typography variant="h6" className={classes.commentsTitle} >Comments</Typography>
                 </Grid> 
                 {
-                    post.comments.map((comment, i) => (
+                    post.comments.map((comment:string, i:number) => (
                         <Comment key={i} comment={comment} />
                     ))
                 }
@@ -104,3 +109,5 @@ export default function PostInformation({post}) {
         </>
     )
 }
+
+export default PostInformation;

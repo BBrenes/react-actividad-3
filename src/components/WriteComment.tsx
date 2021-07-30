@@ -5,10 +5,14 @@ import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
 import { addComment } from '../redux/post/postActions';
 
-export default function WriteComment({id}) {
+interface Props {
+    id: string;
+}
+
+const WriteComment: React.FC<Props> = ({ id }) => {
 
     const dispatch = useDispatch()
-    const [comment, setComment]= useState('')
+    const [comment, setComment]= useState<string>('')
 
     const useInfoStyles = makeStyles({
         textfield: {
@@ -23,12 +27,13 @@ export default function WriteComment({id}) {
 
     const classes = useInfoStyles()
 
-    const handleChange = e => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
         const {value} = e.target;
-        setComment(value)
+        setComment(value as string)
     }
 
-    const saveComment = () => {
+    const saveComment = ():void => {
         if(
           comment !== ""    
         ){
@@ -56,3 +61,5 @@ export default function WriteComment({id}) {
         </>
     )
 }
+
+export default WriteComment;

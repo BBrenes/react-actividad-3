@@ -1,21 +1,11 @@
 import { ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT } from "./postTypes";
-
-type State = Post[];
+import { State, PostI } from '../../models/Post'
 
 type Actions = 
-    { type: "ADD_POST"; payload: Post} |
-    { type: "EDIT_POST"; payload: Post} |
+    { type: "ADD_POST"; payload: PostI} |
+    { type: "EDIT_POST"; payload: PostI} |
     { type: "DELETE_POST"; payload: string} |
     { type: "ADD_COMMENT"; payload: {id: string; comment: string}};
-
-interface Post {
-    id: string;
-    title: string;
-    description: string;
-    category: string;
-    imageURL: string;
-    comments: Array<string>;
-}
 
 const INITIAL_STATE: State = []
 
@@ -24,7 +14,7 @@ const reducer = (state: State = INITIAL_STATE, action: Actions): State => {
         case ADD_POST:
             return [...state, action.payload]
         case EDIT_POST:
-            const newStateEdited = state.map((post: Post): Post => {
+            const newStateEdited = state.map((post: PostI): PostI => {
                 if(post.id === action.payload.id){
                     return action.payload
                 }
@@ -32,10 +22,10 @@ const reducer = (state: State = INITIAL_STATE, action: Actions): State => {
             })
             return newStateEdited
         case DELETE_POST:
-            const newStateDeleted = state.filter((post: Post): boolean => post.id !== action.payload)
+            const newStateDeleted = state.filter((post: PostI): boolean => post.id !== action.payload)
             return newStateDeleted
         case ADD_COMMENT:
-            const newStateComment = state.map((post: Post): Post => {
+            const newStateComment = state.map((post: PostI): PostI => {
                 if(post.id === action.payload.id){
                     return {...post, comments: [...post.comments, action.payload.comment]}
                 }
@@ -46,7 +36,5 @@ const reducer = (state: State = INITIAL_STATE, action: Actions): State => {
             return state
     }
 }
-
-
 
 export default reducer

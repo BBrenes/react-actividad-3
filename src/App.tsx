@@ -9,17 +9,7 @@ import {
 import 'fontsource-roboto';
 import Home from './components/Home';
 import PostPage from './components/PostPage';
-
-type State = Post[];
-
-interface Post {
-    id: string;
-    title: string;
-    description: string;
-    category: string;
-    imageURL: string;
-    comments: Array<string>;
-}
+import { State } from './models/Post'
 
 interface RootState {
   post: State
