@@ -16,12 +16,23 @@ import { IconButton } from '@material-ui/core';
 import InsertLinkIcon from '@material-ui/icons/InsertLink';
 import { useDispatch } from 'react-redux';
 import { addPost, editPost } from '../redux/post/postActions';
+import { Post } from '../models/Post'
 
-export default function PostModal({ theme, postInfo, modalMode }) {
+interface Props {
+  theme: {
+    createButton: object;
+    linkIcon: object;
+    modalErrorMessage: object;
+  };
+  postInfo?: Post;
+  modalMode: string;
+}
+
+const PostModal: React.FC<Props> = ({ theme, postInfo, modalMode }) => {
 
     const dispatch = useDispatch()
-    const [open, setOpen] = React.useState(false);
-    const [post, setPost]= useState(
+    const [open, setOpen] = useState(false);
+    const [post, setPost]= useState<Post>(
       {
         id: '',
         title: '',
@@ -31,7 +42,7 @@ export default function PostModal({ theme, postInfo, modalMode }) {
         comments: []
       } 
     )
-    const [formOk, setFormOk] = useState(null);
+    const [formOk, setFormOk] = useState<boolean | null>(null);
   
     const handleClickOpen = () => {
       setId();
@@ -42,11 +53,11 @@ export default function PostModal({ theme, postInfo, modalMode }) {
       setOpen(false);
     };
   
-    const handleChange = e => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<{ name?: unknown; value: unknown; }>): void => {
       const {name, value} = e.target;
       setPost(prevState=>({
         ...prevState,
-        [name]: value
+        [name as string]: value as string
       }))
     }
     
@@ -61,7 +72,7 @@ export default function PostModal({ theme, postInfo, modalMode }) {
           imageURL: 'https://source.unsplash.com/random',
           comments: []
         }) 
-      } else{
+      } else if(postInfo){
         setPost({
           id: postInfo.id,
           title: postInfo.title,
@@ -179,3 +190,5 @@ export default function PostModal({ theme, postInfo, modalMode }) {
       </div>
     );
   }
+
+  export default PostModal;

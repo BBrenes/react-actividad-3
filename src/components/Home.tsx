@@ -4,14 +4,15 @@ import PostModal from './PostModal';
 import FilterTabs from './FilterTabs';
 import PostList from './PostList';
 import ThemeContext from './ThemeContext';
+import { State } from '../models/Post'
 
-function Home({ postList }) {
+const Home: React.FC<{postList: State}> = ({ postList }) => {
 
     const theme = useContext(ThemeContext)
   
     const [filter, setFilter] = useState('All')
 
-    const handleChangeFilter = (category) => {
+    const handleChangeFilter = (category: string) => {
         setFilter(category)
     }
 

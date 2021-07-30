@@ -10,13 +10,28 @@ import 'fontsource-roboto';
 import Home from './components/Home';
 import PostPage from './components/PostPage';
 
-function mapStateToProps(state) {
+type State = Post[];
+
+interface Post {
+    id: string;
+    title: string;
+    description: string;
+    category: string;
+    imageURL: string;
+    comments: Array<string>;
+}
+
+interface RootState {
+  post: State
+}
+
+function mapStateToProps(state: RootState) {
   return {
     postData : state.post
   }
 }
 
-function App({postData}) {
+const App: React.FC<{postData: State}> = ({postData}) => {
 
   return (
       <ThemeContext.Provider value= { theme }>

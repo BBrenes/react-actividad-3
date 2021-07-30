@@ -2,7 +2,7 @@ import React from 'react'
 import Post from './Post'
 import Grid from '@material-ui/core/Grid'
 
-export default function PostList({ theme, filter, postList, postListExample }) {
+export default function PostList({ theme, filter, postList }) {
 
     const postListFiltered = postList.filter(post => {
         if(filter === 'All'){
